@@ -21,7 +21,7 @@ const Map = () => {
   //   }
   // }
 
-  const { state: { currentLocation } } = useContext(LocationContext);
+  const { state: { currentLocation, locations } } = useContext(LocationContext);
 
   if (!currentLocation) {
     return <ActivityIndicator size="large" style={{ alignSelf:'center',marginTop:'45%'}} />
@@ -34,14 +34,12 @@ const Map = () => {
       // initialRegion sets the center of the map on startup
       initialRegion={{
         ...currentLocation.coords,
-        latitudeDelta: keys.DELTA,
-        longitudeDelta: keys.DELTA,
+        ...keys.DELTAS,
       }}
       // region updated the center of the map as we go
       region={{
         ...currentLocation.coords,
-        latitudeDelta: keys.DELTA,
-        longitudeDelta: keys.DELTA,
+        ...keys.DELTAS,
       }}
     >
       <Circle
@@ -50,7 +48,7 @@ const Map = () => {
         strokeColor="rgba(158, 158, 255, 1.0)"
         fillColor="rgba(158, 158, 255, 0.3)"
       />
-      {/*<Polyline coordinates={points} />*/}
+      <Polyline coordinates={locations.map(loc => loc.coords)} />
     </MapView>
   );
 };

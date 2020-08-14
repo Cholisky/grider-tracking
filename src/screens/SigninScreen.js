@@ -21,10 +21,8 @@ const SigninScreen = () => {
   );
 };
 
-SigninScreen.navigationOptions = () => {
-  return {
-    header: () => false,
-  };
+SigninScreen.navigationOptions = {
+  header: false
 };
 
 const styles = StyleSheet.create({
